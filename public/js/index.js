@@ -1,14 +1,27 @@
 let socket = io();
 
+var html = ""
 function scrollToBottom(){
-    let messages = document.querySelector('#aakash').lastElementChild;
+    let messages = document.querySelector('#messages').lastElementChild;
     messages.scrollIntoView();
 }
 
 // connected to server
 socket.on("connect", function () {
     console.log("connected to the server");
+    let params = window.location.search.substring(1);
+    params = JSON.parse('{"'+ decodeURI(params).replace(/&/g, '","').replace(/\+/g, ' ').replace(/=/g, '":"') + '"}')
 
+    socket.emit('join', params, function(err) {
+        if(err){
+            alert(err);
+            window.location.href = '/';
+        }
+        else{
+            console.log("There is no error");
+
+        }
+    })
 });
 
 // disconnecting to server
@@ -16,22 +29,34 @@ socket.on("disconnect", function () {
 console.log("disconnected to the server");
 });
 
-var html = ""
+socket.on('updateUserList', function(users){
+    console.log(users);
+    var userHtml =`<ol>`;
+    users.forEach(function(user){
+        userHtml += `<li>${user}</li>`
+    })
+    userHtml+="</ol>"
+    document.getElementById('users').innerHTML = userHtml;
+
+})
+
+
 
 // getting the event from server
 socket.on("newMessage", function (message) {
     
     const formattedTime = moment(message.createdAt).format('LT');
     console.log("newMessage", message);
-    console.log("message 1");
-    // let li = document.createElement('li');
-    // li.innerText = `${message.from} ${formattedTime} : ${message.text}`
-    // document.querySelector('body').appendChild(li);
-    
-    html += `<li>
-                    ${message.from} ${formattedTime} : ${message.text}
-                </li>`
-    document.getElementById('aakash').innerHTML = html;
+    html += `<li class="message">
+                <div class="message__title">
+                    <h4>${message.from}</h4>
+                    <span>${formattedTime}</span>
+                </div>
+                <div class="message__body">
+                    <p>${message.text}</p>
+                </div>
+             </li>`
+    document.getElementById('messages').innerHTML = html;
     scrollToBottom();
 });
 
@@ -40,20 +65,16 @@ socket.on("newLocationMessage", function (message) {
     const formattedTime = moment(message.createdAt).format('LT');
     console.log("newLocationMessage", message);
     console.log("message 1");
-    // let li = document.createElement('li');
-    // let a = document.createElement('a');
-    // li.innerText = `${message.from} ${formattedTime} : `
-    // a.setAttribute('target', '_blank')
-    // a.setAttribute('href', message.url)
-    // a.innerText = 'My current location'
-    // li.appendChild(a)
-
-    html += `<li>
-                ${message.from} ${formattedTime} : <a href = "${message.url}">My current Location</a>
+    html += `<li class="message">
+                <div class="message__title">
+                    <h4>${message.from}</h4>
+                    <span>${formattedTime}</span>
+                </div>
+                <div class="message__body">
+                    <a href = "${message.url}">My current location</a>
+                </div>
             </li>`
-
-    // document.querySelector('body').appendChild(li);
-    document.getElementById('aakash').innerHTML = html;
+    document.getElementById('messages').innerHTML = html;
     scrollToBottom();
 });
 

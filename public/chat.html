@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/styles.css">
+    <title>Document</title>
+</head>
+<body class="chat">
+
+    <div class="chat__sidebar">
+        <h3>People</h3>
+        <div id="users"></div>
+    </div>
+    
+    
+    <div class="chat__main">
+
+        <ol id="messages" class="chat__messages">
+    
+        </ol>
+    
+        <div class="chat__footer">
+            <form id="message-form">
+                <input type="text" name="message" placeholder="message" autofocus autocomplete="off"/>
+                <button type="submit" id="submit-btn">Submit</button>
+            </form>
+            <button type="button" id="send-location">send Location</button>
+            
+        </div>
+    </div>
+
+    <!-- <script id = "message-template" type="text/template">
+        <p>Hello this is aakash Pandey</p>
+    </script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./js/index.js"></script>
+</body>
+</html>

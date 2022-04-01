@@ -1,35 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/styles.css">
-    <title>Document</title>
-</head>
-<body>
-    <p>welcome to the chat app</p>
-    <div class="chat_main">
-
-        <ol id="aakash" class="chat_messages">
-    
-        </ol>
-    
-        <div class="chat_footer">
-            <form id="message-form">
-                <input type="text" name="message" placeholder="message" autofocus autocomplete="off">
-                <button type="submit" id="submit-btn">Submit</button>
-            </form>
-            <button type="button" id="send-location">send Location</button>
-            
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Join | ChatApp</title>
+    <meta name="viewport" content="width=device-width, inital-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/css/styles.css">
+  </head>
+  <body class="centered-form">
+    <div class="centered-form__form">
+      <form action="/chat.html">
+        <div class="form-field"><h3>Join Chat</h3></div>
+        <div class="form-field">
+          <label>Display name</label>
+          <input type="text" name="name" autofocus>
         </div>
+        <div class="form-field">
+          <label>Room name</label>
+          <input type="text" name="room" autofocus>
+        </div>
+        <div class="form-field">
+          <button>Join</button>
+        </div>
+      </form>
     </div>
 
-    <!-- <script id = "message-template" type="text/template">
-        <p>Hello this is aakash Pandey</p>
-    </script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="./js/index.js"></script>
-</body>
+  </body>
 </html>
